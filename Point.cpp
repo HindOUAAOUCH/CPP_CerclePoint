@@ -1,44 +1,39 @@
 #include "Point.h"
 #include <iostream>
 #include <cmath>
+using namespace std;
 
+Point::Point(double x, double y) :x(x), y(y) {}
 
-Point::Point(double x, double y) :x(x), y(y)
+Point* Point::fabriquer(double x, double y)
 {
-    //std::cout << "Ctor point";
+    return new Point(x, y);
+
+}
+
+void Point::translate(double x, double y)
+{
+    this->x += x;
+    this->y += y;
 }
 
 void Point::afficher() const
 {
-    std::cout << "x: " << this->x << std::endl;
-    std::cout << "y: " << this->y << std::endl;
+    cout << "(" << this->x << "," << this->y << ")" << endl;
 }
 
-//p1(x1,y1) et p2(x2,y2) => dist = sqrt((x2-x1)^2 + (y2-y1)^2)
 double Point::distance(const Point& p) const
 {
-    return sqrt(pow(this->x - p.x, 2) + pow(this->y - p.y, 2));
-
-}
-
-void Point::translater(double dx, double dy)
-{
-    this->x += dx;
-    this->y += dy;
-
+    return sqrt(pow(p.x, 2) + pow(p.y, 2));
 }
 
 bool Point::operator==(const Point& p) const
 {
-    return (this->x == p.x && this->y == p.y);
+    return (this->x == p.x) && (this->y == p.y);
 }
-
-//bool Point::operator==(const Point& p) const
-//{
-//    return this->x == p.y && this->y == p.y;
-//}
 
 Point::~Point()
 {
-    //std::cout << "Dtor point" << std::endl;
+    cout << "detruire point" << endl;
+
 }
