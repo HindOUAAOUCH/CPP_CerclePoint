@@ -5,18 +5,19 @@ class Cercle
 {
 private:
 	int id;
-	Point centre;
+	Point* centre;
 	double rayon;
-	const static double PI;
+	static double pi;
 public:
-	Cercle(int id = 0, double rayon = 0.0, Point centre = Point());
-	Cercle(Cercle&);
+	Cercle(int id, Point* p, double r);
 	void afficher() const;
+	void modifRayon(double r);
+	void translate(double x, double y);
+	double perimetre() const;
+	double surface() const;
+	bool appartCercle(const Point& p) const;
+	bool operator==(const Cercle& c) const;
 	~Cercle();
-	void Modifier(double r);//modification de rayon du cercle
-	double Surface() const;
-	double Perimetre() const;
-	bool Egalit(const Cercle&) const;//egalité de deux cercle
-	bool appartient(const Point&)const;
-
 };
+
+
