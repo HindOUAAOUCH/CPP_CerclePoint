@@ -1,61 +1,55 @@
 #include "Cercle.h"
-#include <iostream>
 #include "Point.h"
+#include <cmath>
+#include <iostream>
+using namespace std;
+double Cercle::pi = 3.14;
 
-
-const double Cercle::PI = 3.14;
-
-Cercle::Cercle(int id, double rayon, Point p) :id(id), rayon(rayon), centre(p)
+Cercle::Cercle(int id, Point* p, double r)
 {
-	//std::cout << "Constructeur" << std::endl;
-
+    this->id = id;
+    this->centre = p;
+    this->rayon = r;
 }
-
-Cercle::Cercle(Cercle& c)
-{
-	this->id = c.id;
-	this->rayon = c.rayon;
-	this->centre = c.centre;
-}
-
 
 void Cercle::afficher() const
 {
-	std::cout << "id= " << this->id << std::endl;
-	std::cout << "rayon= " << this->rayon << std::endl;
-	this->centre.afficher();
+    cout << "Cercle " << this->id << ": " << "centre= ";
+    this->centre->afficher();
+    cout << "Rayon=" << this->rayon;
+}
 
+void Cercle::modifRayon(double r)
+{
+    this->rayon = r;
+}
+
+void Cercle::translate(double x, double y)
+{
+    this->centre->translate(x, y);
+}
+
+double Cercle::perimetre() const
+{
+    return 2 * pi * this->rayon;
+}
+
+double Cercle::surface() const
+{
+    return pow(this->rayon, 2) * pi;
+}
+
+bool Cercle::appartCercle(const Point& p) const
+{
+    return p.distance(*(this->centre)) <= this->rayon;
+}
+
+bool Cercle::operator==(const Cercle& c) const
+{
+    return (c.centre == this->centre) && (c.rayon == this->rayon);
 }
 
 Cercle::~Cercle()
 {
-	//std::cout << "Destructeur" << std::endl;
+    cout << "detruire cercle" << endl;
 }
-
-void Cercle::Modifier(double r)
-{
-	this->rayon = r;
-}
-
-double Cercle::Surface() const
-{
-	return (pow(this->rayon, 2) * PI);
-}
-
-double Cercle::Perimetre() const
-{
-	return (pow(this->rayon, 2));
-}
-
-bool Cercle::Egalit(const Cercle& c) const
-{
-
-	return (this->centre == c.centre && this->rayon == c.rayon);
-}
-
-bool Cercle::appartient(const Point& p) const
-{
-	return (this->centre.distance(p) == this->rayon);
-}
-
-
